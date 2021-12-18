@@ -8,16 +8,16 @@ with open('input18.txt', 'r') as f:
 processed = []
 for line in lines:
     processed_line = []
-    paren_diff = 0
+    depth = 0
     for i in range(len(line)):
         if line[i] == '[':
-            paren_diff += 1
+            depth += 1
         elif line[i] ==  ']':
-            paren_diff -= 1
+            depth -= 1
         elif line[i] == ',':
             pass
         else:
-            processed_line.append([int(line[i]),paren_diff])
+            processed_line.append([int(line[i]),depth])
     processed.append(processed_line)
 
 def add(proc_sn1, proc_sn2):
@@ -49,16 +49,16 @@ def add(proc_sn1, proc_sn2):
                     break
     return sum_sn
 
-def magnitude(sum):
-    while len(sum) > 1:
-        for i in range(len(sum)):
-            if i < len(sum) - 1 and sum[i][1] == sum[i+1][1]:
-                depth = sum[i][1]
-                val = sum[i][0] * 3 + sum[i+1][0] * 2
-                del sum[i:i+2]
-                sum.insert(i,[val,depth-1])
+def magnitude(proc_sn):
+    while len(proc_sn) > 1:
+        for i in range(len(proc_sn)):
+            if i < len(proc_sn) - 1 and proc_sn[i][1] == proc_sn[i+1][1]:
+                depth = proc_sn[i][1]
+                val = proc_sn[i][0] * 3 + proc_sn[i+1][0] * 2
+                del proc_sn[i:i+2]
+                proc_sn.insert(i,[val,depth-1])
                 break
-    return sum[0][0]
+    return proc_sn[0][0]
 
 #print(magnitude(functools.reduce(add, processed)))
 res = 0
