@@ -1,3 +1,7 @@
+"""
+Problem statement: https://adventofcode.com/2021/day/18
+"""
+
 import functools
 
 lines = []
@@ -60,7 +64,8 @@ def magnitude(proc_sn):
                 break
     return proc_sn[0][0]
 
-#print(magnitude(functools.reduce(add, processed)))
+print(magnitude(functools.reduce(add, processed)))
+
 res = 0
 for i in range(len(processed)-1):
     for j in range(i+1, len(processed)):
